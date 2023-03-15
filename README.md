@@ -1,5 +1,5 @@
-<h1>SunnyFramework Shop Systems</h1>
-<p>SunnyFramework Shop Systems is one of the web development bundle name "SunnyFramework". The Layouts of website are powered by SunnyUX</p>
+<h1>Sunny Framework Shop</h1>
+<p>Sunny Framework Shop is one of the web development pack name "Sunny Framework" which I start developing web applications such as article, shop and others. The Layouts of Web Application are Powered by SunnyUX (My own CSS Library). This web application is running on Node.js and MySQL databases.</p>
 <h1>Configuration.</h1>
 <p>You need to configs couples things before you can starting SunnyFW on Node.js</p>
 <p>1) Creating <b>.env</b> file containing variables as below.</p>
