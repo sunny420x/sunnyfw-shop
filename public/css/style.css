@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+:root {
+    --container-max-width: 1200px;
+    --nav-height: 50px;
+    --nav-text-color: var(--grey);
+    --nav-text-color-hover: var(--white);
+    --nav-bg: var(--dark);
+}
+* {
+    font-family: 'Kanit';
+}
+body {
+    background: var(--grey);
+}
+
+.icon {
+    margin-right: 5px;
+}

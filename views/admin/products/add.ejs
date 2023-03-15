@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Products | Admin</title>
+    <%-include('../../include/head')%>
+    <script src="/ckeditor/ckeditor.js"></script>
+</head>
+<body>
+    <%-include('../../include/nav')%>
+    <div class="container white pt-10 pb-30 px-20" id="mainpage">
+        <div class="grid-9-3">
+            <div class="row">
+                <div class="tab">
+                    <a href="/admin" class="link">Admin</a> / Add Product
+                </div>
+                <h1 class="bl-green">Add Product</h1>
+                <form action="/admin/products/add" method="post">
+                    <input type="text" name="title" maxlength="200" placeholder="Product Title.">
+                    <input type="text" name="cover" maxlength="200" placeholder="Product Cover (Image URL).">
+                    <input type="text" name="price" maxlength="6" placeholder="Price (xx.xx)">
+                    <input type="text" name="category" maxlength="50" placeholder="Category">
+                    <textarea name="contents" rows="5" id="editor"></textarea>
+                    <script>
+                        CKEDITOR.replace( 'editor' );
+                    </script>
+                    <input type="submit" value="Add" class="btn red">
+                </form>
+            </div>
+            <div class="row">
+                <%-include('../include/sidebar')%>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

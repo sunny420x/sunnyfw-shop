@@ -1,0 +1,60 @@
+<% if(locals.alert) {%>
+    <% if(locals.alert == "loggedin") { %>
+        <script>
+        Swal.fire({
+        icon: 'success',
+        title: 'You are now logged in!',
+        })
+        </script>
+    <% } %>
+    <% if(locals.alert == "loggedout") { %>
+        <script>
+        Swal.fire({
+        icon: 'success',
+        title: 'You are now logged out!',
+        })
+        </script>
+    <% } %>
+    <% if(locals.alert == "successfullyupdate") { %>
+        <script>
+        Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Row has been updated!',
+        showConfirmButton: false,
+        timer: 1500
+        })
+        </script>
+    <% } %>
+    <% if(locals.alert == "succuessfullydelete") { %>
+        <script>
+        Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Row has been deleted!',
+        showConfirmButton: false,
+        timer: 1500
+        })
+        </script>
+    <% } %>
+    <% if(locals.alert == "wrongpassword") { %>
+        <script>
+        Swal.fire({
+        icon: 'error',
+        title: 'Oops Wrong Password...',
+        text: 'This username and password are not match any rows!',
+        })
+        </script>
+    <% } %>
+    <% if(locals.alert == "successfullyinstall") { %>
+        <script>
+        Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Database has been installed!',
+        showConfirmButton: false,
+        timer: 1500
+        })
+        </script>
+    <% } %>
+<% } %>

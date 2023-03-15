@@ -1,0 +1,21 @@
+<div class="nav blacker">
+  <div class="container">
+    <div class="grid">
+      <button class="btn transparent text-white" id="collapse-btn" style="height: 52px;" onclick="collapse();"><i class="fa-solid fa-bars"></i></button>
+      <ul class="px-10" id="collapse">
+        <a href="/"><li><i class="fa-solid fa-house icon"></i> Home</li></a>
+        <a href="/about"><li><i class="fa-solid fa-users icon"></i> About</li></a>
+        <a href="/products"><li><i class="fa-solid fa-box-open icon"></i> Products</li></a>
+        <%if(locals.is_admin == true) {%>
+          <li class="dropdown" onclick="showhide(this)">
+              Admin
+              <ul>
+                  <a href="/admin"><li>Dashboard</li></a>
+                  <a href="/admin/logout"><li>Logout</li></a>
+              </ul>
+          </li>
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</div>

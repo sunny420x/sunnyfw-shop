@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login | Sunny-Framework</title>
+    <%-include('../include/head')%>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <%-include('../include/nav')%>
+    <%-include('../include/alert')%>
+    <div class="container white mt-70">
+        <div class="grid">
+            <div class="row-100">
+                <div class="p-20">
+                    <h2 class="bl-green">Admin Login</h2>
+                    <form action="/admin/login" method="post">
+                        <input type="text" name="username" placeholder="Username">
+                        <input type="password" name="password" placeholder="Password">
+                        <input type="checkbox" name="remember" value="1"> Remember Me
+                        <input type="submit" value="Login" class="btn green">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

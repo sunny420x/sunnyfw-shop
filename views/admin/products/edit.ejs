@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Products | Admin</title>
+    <%-include('../../include/head')%>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <%-include('../../include/nav')%>
+    <%-include('../../include/alert')%>
+    <div class="container white pt-10 pb-30 px-20" id="mainpage">
+        <div class="grid-9-3">
+            <div class="row">
+                <div class="tab">
+                    <a href="/admin" class="link">Admin</a> / Add Product
+                </div>
+                <h1 class="bl-orange">Edit "<%=product.title%>" in Products.</h1>
+                <form action="/admin/products/edit" method="post">
+                    <input type="hidden" name="id" value="<%=product.id%>">
+                    <input type="text" name="title" value="<%=product.title%>" maxlength="200">
+                    <input type="text" name="cover" value="<%=product.cover%>" maxlength="200">
+                    <input type="text" name="price" value="<%=product.price%>" maxlength="6">
+                    <input type="text" name="category" value="<%=product.category%>" maxlength="50">
+                    <textarea name="content" rows="5" id="editor"><%=product.contents%></textarea>
+                    <script>
+                        CKEDITOR.replace( 'editor' );
+                    </script>
+                    <input type="submit" value="Edit" class="btn darkblue">
+                </form> 
+            </div>
+            <div class="row">
+                <%-include('../include/sidebar')%>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
