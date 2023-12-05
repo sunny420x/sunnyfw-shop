@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
 
 :root {
-    --container-max-width: 1200px;
+    --container-max-width: 1400px;
     --nav-height: 50px;
     --nav-text-color: var(--grey);
     --nav-text-color-hover: var(--white);
@@ -16,4 +16,12 @@ body {
 
 .icon {
     margin-right: 5px;
+}
+
+.cart {
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
 }

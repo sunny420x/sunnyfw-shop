@@ -50,19 +50,49 @@ module.exports = (app,sha256) => {
     })
 
     app.get("/install", (req,res) => {
-        db.query("SELECT * FROM admin,products", (err,result) => {
+        require('./install')(sha256)
+
+        db.query("SELECT * FROM admin", (err,result) => {
             if(err) {
                 if(err.code = "ER_NO_SUCH_TABLE") {
-                    require('./install')(sha256)
+                    install_admin_table();
+
                     res.cookie('alert', 'successfullyinstall')
                     res.redirect("/")
                     res.end()
                 }
-            } else {
-                res.redirect("/")
-                res.end()
             }
+            res.redirect("/")
+            res.end()
         })
+        db.query("SELECT * FROM products", (err,result) => {
+            if(err) {
+                if(err.code = "ER_NO_SUCH_TABLE") {
+                    install_products_table();
+
+                    res.cookie('alert', 'successfullyinstall')
+                    res.redirect("/")
+                    res.end()
+                }
+            }
+            res.redirect("/")
+            res.end()
+        })
+        db.query("SELECT * FROM orders", (err,result) => {
+            if(err) {
+                if(err.code = "ER_NO_SUCH_TABLE") {
+                    install_orders_table();
+
+                    res.cookie('alert', 'successfullyinstall')
+                    res.redirect("/")
+                    res.end()
+                }
+            }
+            res.redirect("/")
+            res.end()
+        })
+        res.redirect("/")
+        res.end()
     })
 
     //About Page
@@ -92,5 +122,18 @@ module.exports = (app,sha256) => {
                 })
             })
         }
+    })
+
+    app.get("/cart", (req,res) => {
+        var cart = req.cookies.Cart;
+        cart = cart.split(",")
+        db.query("SELECT * FROM products WHERE id IN (?)", [cart], (err,result) => {
+            if(err) throw err;
+            console.log(result);
+            res.render('cart', {
+                cart:result,
+            });
+            res.end();
+        })
     })
 }

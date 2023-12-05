@@ -8,12 +8,30 @@
 <body>
     <%-include('../include/nav')%>
     <%-include('../include/alert')%>
-    <div class="container white mb-50 px-20 pb-30" id="mainpage">
+    <div class="container card rounded white p-30 mt-20">
         <div class="grid-8-4">
             <div class="row">
                 <div class="tab">
                     <a href="/admin" class="link">Admin</a>
                 </div>
+                <h1 class="bl-red">Orders</h1>
+                <table>
+                    <tr>
+                        <td>#</td>
+                        <td>Product Name</td>
+                    </tr>
+                    <%
+                    orders.forEach((row) => {
+                    %>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <%
+                    })
+                    %>
+                </table>
+
                 <h1 class="bl-darkblue">Products Manager. <button class="btn green" onclick="window.location.href='/admin/products/add'">Add</button></h1>
                 <table class="table">
                     <tr>
