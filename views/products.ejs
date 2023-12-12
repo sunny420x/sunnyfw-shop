@@ -28,7 +28,7 @@
                         <div class="cover"><img class="w-100" src="<%=row.cover%>" /></div>
                         <div class="content p-10">
                           <h1><a href="/view/<%=row.id%>"><%=row.title%></a></h1>
-                          <p><%=row.price%></p>
+                          <p><%=row.price.toFixed(1)%></p>
                           <p><%=row.contents.replace(/(<([^>]+)>)/ig,'').substring(0,200)%></p>
                           <button class="btn darkblue" onclick="window.location.href='/view/<%=row.id%>'"><i class="fa-solid fa-eye icon"></i>View</button>
                           <button class="btn red" onclick="addtocart('<%=row.title%>')"><i class="fa-solid fa-cart-shopping icon"></i> Add to Cart</button>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Order | Admin</title>
+    <%-include('../../include/head')%>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <%-include('../../include/nav')%>
+    <%-include('../../include/alert')%>
+    <div class="container card rounded white p-30 m-20">
+        <div class="grid-9-3">
+            <div class="row">
+                <div class="tab">
+                    <a href="/admin" class="link">Admin</a> / Edit Order
+                </div>
+                <h1 class="bl-orange">Edit "<%=order.id%>" in Orders.</h1>
+                <form action="/admin/orders/edit" method="post">
+                    <input type="hidden" name="id" value="<%=order.id%>">
+                    <input type="number" name="status" value="<%=order.status%>" maxlength="1">
+                    <input type="submit" value="Edit" class="btn darkblue">
+                </form> 
+            </div>
+            <div class="row">
+                <%-include('../include/sidebar')%>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

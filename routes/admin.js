@@ -4,20 +4,14 @@ module.exports = (app,sha256) => {
 
     app.get("/admin", (req,res) => {
         var is_admin = require('./modules/check_admin')(req,res)
-        if(req.cookies.alert != undefined) {
-            var alert = req.cookies.alert
-            res.clearCookie('alert')
-        }
         if(is_admin == true) {
-            db.query("SELECT id,title FROM products ORDER BY id DESC", (err,products) => {
+            db.query("SELECT id,title,price FROM products ORDER BY id DESC", (err,products) => {
                 if(err) throw err;
-                if(alert != undefined) {
-                    res.render("admin/home", {products:products,alert:alert,is_admin:is_admin})
+                db.query("SELECT o.id, o.status, o.product_id, p.title, p.price, o.amount FROM orders as o JOIN products as p ON p.id = o.product_id ORDER BY o.id DESC", (err,orders) => {
+                    if(err) throw err;
+                    res.render("admin/home", {products:products,orders:orders,is_admin:is_admin})
                     res.end()
-                } else {
-                    res.render("admin/home", {products:products,is_admin:is_admin})
-                    res.end()
-                }
+                })
             })
         } else {
             res.redirect("/admin/login")
@@ -27,15 +21,11 @@ module.exports = (app,sha256) => {
 
     app.get("/admin/login", (req,res) => {
         var is_admin = require('./modules/check_admin')(req,res)
-        if(req.cookies.alert != undefined) {
-            var alert = req.cookies.alert
-            res.clearCookie('alert')
-        }
         if(is_admin == true) {
             res.redirect("/admin")
             res.end()
         } else {
-            res.render("admin/login", {alert:alert})
+            res.render("admin/login")
             res.end()
         }
     })
@@ -127,21 +117,12 @@ module.exports = (app,sha256) => {
     app.get("/admin/products/edit/:id", (req,res) => {
         var is_admin = require('./modules/check_admin')(req,res)
         if(is_admin == true) {
-            if(req.cookies.alert != undefined) {
-                var alert = req.cookies.alert
-                res.clearCookie('alert')
-            }
             var id = req.params.id
             db.query("SELECT * FROM products WHERE id = ? LIMIT 1", [id], (err,product) => {
                 if(err) throw err;
                 if(product.length > 0) {
-                    if(alert != undefined) {
-                        res.render('admin/products/edit', {product:product[0],alert:alert,is_admin:is_admin})
-                        res.end()
-                    } else {
-                        res.render('admin/products/edit', {product:product[0],is_admin:is_admin})
-                        res.end()
-                    }
+                    res.render('admin/products/edit', {product:product[0],is_admin:is_admin})
+                    res.end()
                 } else {
                     timeStamp("[!] Cannot Fetch product id = "+id)
                 }
@@ -193,4 +174,39 @@ module.exports = (app,sha256) => {
         }
     })
     //END Create Edit Delete Contents
+
+    // Orders
+    app.get("/admin/orders/edit/:id", (req,res) => {
+        var is_admin = require('./modules/check_admin')(req,res)
+        if(is_admin == true) {
+            var id = req.params.id
+            db.query("SELECT id,status FROM orders WHERE id = ? LIMIT 1", [id], (err,order) => {
+                if(err) throw err;
+                if(order.length == 1) {
+                    res.render('admin/orders/edit', {order:order[0],is_admin:is_admin})
+                    res.end()
+                }
+            })
+        } else {
+            res.redirect("/admin/login")
+            res.end()
+        }
+    })
+    app.post("/admin/orders/edit", (req,res) => {
+        var is_admin = require('./modules/check_admin')(req,res)
+        if(is_admin == true) {
+            var id = req.body.id
+            var status = req.body.status
+
+            db.query("UPDATE orders SET status = ? WHERE id = ?", [status,id], (err,result) => {
+                if(err) throw err
+                res.cookie('alert', 'successfullyupdate')
+                res.redirect('/admin/orders/edit/'+id)
+                res.end()
+            })
+        } else {
+            res.redirect("/admin/login")
+            res.end()
+        }
+    })
 }

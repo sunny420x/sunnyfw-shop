@@ -17,15 +17,48 @@
                 <h1 class="bl-red">Orders</h1>
                 <table>
                     <tr>
-                        <td>#</td>
-                        <td>Product Name</td>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
                     </tr>
                     <%
                     orders.forEach((row) => {
                     %>
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td><%=row.id%></td>
+                        <td><%=row.title%></td>
+                        <td><%=row.amount%></td>
+                        <td><%=row.price.toFixed(1)%></td>
+                        <td>
+                            <div class="btn red w-max mx-auto">
+                                <%
+                                    if(row.status == 0) {
+                                %>
+                                    Wait comfirmation from seller.
+                                <%
+                                    }
+                                    if(row.status == 1) {
+                                %>
+                                    Prepare to shipping.
+                                <%
+                                    }
+                                    if(row.status == 2) {
+                                %>
+                                    In shipping.
+                                <%
+                                    }
+                                    if(row.status == 2) {
+                                %>
+                                    Shipping successful.
+                                <%
+                                    }
+                                %>
+                            </div>
+                        </td>
+                        <td><a href="/admin/orders/edit/<%=row.id%>" class="btn darkblue none">Edit</a></td>
                     </tr>
                     <%
                     })
@@ -36,7 +69,8 @@
                 <table class="table">
                     <tr>
                         <th>#</th>
-                        <th>Titile</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>    
@@ -46,6 +80,7 @@
                     <tr>
                         <td><%=row.id%></td>
                         <td><%=row.title%></td>
+                        <td><%=row.price.toFixed(1)%></td>
                         <td><button class="btn orange" onclick="window.location.href='/admin/products/edit/<%=row.id%>'">Edit</button></td>
                         <td><button class="btn red" onclick="Swal.fire({
                             title: 'Are you sure?',

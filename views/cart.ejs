@@ -9,6 +9,7 @@
 
     <%
     price = 0;
+    totals_amount = 0;
     i = 0;
     %>
 
@@ -17,13 +18,15 @@
         <div class="grid-4 my-40">
             <%
             cart.forEach((row) => {
-                i++;
+                totals_amount += parseInt(amounts[i]);
             %>
             <div class="media">
                 <div class="cover"><img class="w-100" src="<%=row.cover%>" /></div>
                 <div class="content">
                     <h1><a href="/view/<%=row.id%>"><%=row.title%></a></h1>
-                    <p><%=row.price%></p>
+                    <p>ราคาต่อชิ้น: <%=row.price.toFixed(1)%> บาท</p>
+                    <p>ราคารวม: <%=(row.price*amounts[i]).toFixed(1)%> บาท</p>
+                    <p>จำนวน: <%=amounts[i]%></p>
                     <p><%=row.contents.replace(/(<([^>]+)>)/ig,'').substring(0,200)%></p>
                     <div>
                     <button class="btn darkblue" onclick="window.location.href='/view/<%=row.id%>'"><i class="fa-solid fa-eye icon"></i>View</button>
@@ -32,14 +35,15 @@
                 </div>
                 </div>
             <%
-                price += row.price;
+                price += row.price*amounts[i];
+                i++;
             })
             %>
         </div>
-        <h3 class="tab">รวมทั้งสิ้น <%=i%> รายการ ค่าใช้จ่ายรวมเท่ากับ <%=price%> บาท</h3>
+        <h3 class="tab">รวมทั้งสิ้น <%=totals_amount%> รายการ ค่าใช้จ่ายรวมทั้งสิ้นเท่ากับ <%=price.toFixed(1)%> บาท</h3>
         <div class="grid-2">
             <button class="btn grey w-100">Clear</button>
-            <button class="btn red w-100">Pay</button>
+            <button class="btn red w-100" onclick="window.location.href='/order'">Pay</button>
         </div>
     </div>
 </body>

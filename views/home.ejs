@@ -7,11 +7,11 @@
 <body>
     <%-include('include/nav')%>
     <button class="btn green rounded cart m-10" onclick="window.location.href='/cart'"><h3 class="p-0 m-0"><i class="fa-solid fa-cart-shopping icon"></i></h3></button>
-    <div class="main orange">
+    <!-- <div class="main orange">
         <div class="mx-auto white-transparent px-20" style="width: 300px;">
             <h1>Hello! Welcome To Sunny420x Shop!</h1>
         </div>
-    </div>
+    </div> -->
     <div class="container white p-20 pb-30">
         <div class="grid-2-10">
             <div class="p-20">
@@ -34,9 +34,10 @@
                         <div class="cover"><img class="w-100" src="<%=row.cover%>" /></div>
                         <div class="content p-10">
                           <h1><a href="/view/<%=row.id%>"><%=row.title%></a></h1>
-                          <p><%=row.price%></p>
+                          <p><%=row.price.toFixed(1)%></p>
                           <p><%=row.contents.replace(/(<([^>]+)>)/ig,'').substring(0,200)%></p>
                           <div>
+                            <input type="number" id="<%=row.id%>_amount" value="1">
                             <button class="btn red" onclick="addtocart('<%=row.id%>')"><i class="fa-solid fa-cart-shopping icon"></i> Add to cart</button>
                           </div>
                         </div>
